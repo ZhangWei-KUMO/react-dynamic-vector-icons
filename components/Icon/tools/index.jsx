@@ -39,6 +39,7 @@ class Icon extends Component {
     }
     return;
   }
+
   handleMouseEnter = () => {
     let { trigger, type } = this.props;
     if (trigger === "mouseEnter") {
@@ -51,13 +52,6 @@ class Icon extends Component {
     this.timer = null
   };
 
-  renderSVG = (svg) => {
-    if (!svg) {
-      return ""
-    } else {
-      return svg
-    }
-  }
   render() {
     let { size } = this.props;
     return (

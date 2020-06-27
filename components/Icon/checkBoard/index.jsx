@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin'
 
 class Icon extends Component {
   // static propTypes = {
@@ -24,6 +25,7 @@ class Icon extends Component {
   };
 
   componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
     let { trigger } = this.props;
     if (trigger === "loaded") {
@@ -40,8 +42,6 @@ class Icon extends Component {
   };
 
   animation = () => {
-    gsap.registerPlugin(MotionPathPlugin);
-
     var tl = new TimelineMax();
     tl.from('#ice-board', 0.6, { y: -800, transformOrigin: "center", ease: Power2.easeOut })
       .from('#ice-board-bc', 0.2, { opacity: 0, transformOrigin: "center", ease: Power2.easeOut })
@@ -68,13 +68,6 @@ class Icon extends Component {
     this.timer = null
   };
 
-  renderSVG = (svg) => {
-    if (!svg) {
-      return ""
-    } else {
-      return svg
-    }
-  }
   render() {
     let { size } = this.props;
     return (

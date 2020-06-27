@@ -8,13 +8,13 @@
     "components",
     "UI library"
   ],
-  "homepage": "http://doc.cloud-wave.cn/",
+  "homepage": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons",
   "bugs": {
-    "url": "https://github.com/ZhangWei-KUMO/icecreamd/issues"
+    "url": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ZhangWei-KUMO/icecreamd"
+    "url": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",

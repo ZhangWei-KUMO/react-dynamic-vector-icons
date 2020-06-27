@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { TimelineMax, Power2, Bounce, Circ } from "gsap";
+import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { CSSPlugin } from 'gsap/CSSPlugin';
 import debounce from '../../util/debounce';
 
 class Icon extends Component {
@@ -10,6 +12,8 @@ class Icon extends Component {
   };
 
   componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
+    gsap.registerPlugin(MotionPathPlugin);
     let { trigger, type } = this.props;
     if (trigger === "loaded") {
       this.animation()
@@ -39,7 +43,8 @@ class Icon extends Component {
       this.animation()
     }
     return;
-  }
+  };
+
   handleMouseEnter = () => {
     let { trigger, type } = this.props;
     if (trigger === "mouseEnter") {
@@ -52,13 +57,6 @@ class Icon extends Component {
     this.timer = null
   };
 
-  renderSVG = (svg) => {
-    if (!svg) {
-      return ""
-    } else {
-      return svg
-    }
-  }
   render() {
     let { size } = this.props;
     return (
