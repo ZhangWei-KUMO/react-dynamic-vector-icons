@@ -7,3 +7,6 @@ export { default as Icecream } from "./Icon/icecream";
 export { default as Industry } from "./Icon/industry";
 export { default as Navigator } from "./Icon/navigator";
 export { default as Rain } from "./Icon/rain";
+export { default as Thermometer } from "./Icon/thermometer";
+export { default as Tools } from "./Icon/tools";
+export { default as Wifi } from "./Icon/wifi";

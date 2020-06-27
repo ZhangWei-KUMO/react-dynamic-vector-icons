@@ -1,47 +1,38 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
+import { CSSPlugin } from 'gsap/CSSPlugin';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import debounce from '../../util/debounce';
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 
-class Icon extends Component {
-  // static propTypes = {
-  //   prefixCls: PropTypes.string,
-  //   type: PropTypes.string,
-  //   size: PropTypes.string,
-  //   trigger: PropTypes.string,
-  // };
-
-  // static defaultProps = {
-  //   prefixCls: "ice-components",
-  //   type: "",
-  //   size: "60",
-  //   trigger: ""
-  // };
-
+class Wifi extends PureComponent {
   constructor(props) {
     super(props);
-    this.timer = null
+    this.timer = null;
+  };
+
+  static defaultProps = {
+    size: "80",
   };
 
   componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
-    let { trigger } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 4000)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 4000)()
+      }, 4000)
     } else {
       return;
     }
   };
 
-  animation = () => {
-    gsap.registerPlugin(MotionPathPlugin);
+  componentWillUnmount() {
+    let timer = null;
+  }
 
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.from('#wifi-three', 0.2, { opacity: 0.2, transformOrigin: "center" })
       .from('#wifi-two', 0.2, { opacity: 0.2, transformOrigin: "center" })
@@ -51,32 +42,13 @@ class Icon extends Component {
       .from('#wifi-star', 0.5, { opacity: 0, transformOrigin: "center" })
   };
 
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
-  componentWillUnmount() {
-    this.timer = null
-  };
-
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 4000)}
-        onClick={debounce(this.handleClick, 4000)}
+        onMouseEnter={debounce(this.startAnimation, 4000)}
+        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg enableBackground="new 0 0 512 512" height={size} viewBox="0 0 512 512" width={size} xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -105,4 +77,4 @@ class Icon extends Component {
   }
 }
 
-export default Icon;
+export default Wifi;

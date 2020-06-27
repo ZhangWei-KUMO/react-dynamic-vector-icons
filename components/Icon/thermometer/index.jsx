@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
-import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin';
 import debounce from '../../util/debounce';
 
-class Icon extends Component {
-
+class Thermometer extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
+  static defaultProps = {
+    size: "80",
+  };
+
   componentDidMount() {
-    gsap.registerPlugin(CSSRulePlugin);
-    let { trigger } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
+    gsap.registerPlugin(CSSPlugin)
+    gsap.registerPlugin(MotionPathPlugin);
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 4000)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 4000)()
+      }, 4000)
     } else {
       return;
     }
   };
 
-  animation = () => {
+  componentWillUnmount() {
+    this.timer = null
+  };
+
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.from('#tem-left', 0.5, { scaleX: 0, transformOrigin: "bottom", ease: Bounce.easeOut })
       .from('#tem-right', 0.2, { scaleX: 0, transformOrigin: "top", ease: Power2.easeOut })
@@ -38,32 +43,13 @@ class Icon extends Component {
       .from('#tem-sun', 0.2, { scaleX: 0, transformOrigin: "center", ease: Circ.easeOut })
   };
 
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
-  componentWillUnmount() {
-    this.timer = null
-  };
-
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 4000)}
-        onClick={debounce(this.handleClick, 4000)}
+        onMouseEnter={debounce(this.startAnimation, 4000)}
+        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg id="Capa_3" enableBackground="new 0 0 80 80" height={size} width={size}
           viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -96,4 +82,4 @@ class Icon extends Component {
   }
 }
 
-export default Icon;
+export default Thermometer;

@@ -18,6 +18,15 @@ class Navigator extends PureComponent {
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 4000)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 4000)()
+      }, 4000)
+    } else {
+      return;
+    }
   };
 
   componentWillUnmount() {

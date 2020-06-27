@@ -10,47 +10,31 @@ class Rain extends PureComponent {
     this.timer = null
   };
 
+  static defaultProps = {
+    size: "80",
+  };
+
   componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
-    let { trigger } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 1500)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 1500)()
+      }, 1500)
     } else {
       return;
     }
   };
 
-  animation = () => {
-    gsap.registerPlugin(MotionPathPlugin);
-
-    var tl = new TimelineMax();
-    tl.from('#rain', 1, { y: -600, transformOrigin: "top", ease: Power2.easeOut })
-
-  };
-
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
   componentWillUnmount() {
     this.timer = null
+  };
+
+  startAnimation = () => {
+    var tl = new TimelineMax();
+    tl.from('#rain', 1, { y: -600, transformOrigin: "top", ease: Power2.easeOut })
   };
 
   render() {
@@ -58,8 +42,8 @@ class Rain extends PureComponent {
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 1500)}
-        onClick={debounce(this.handleClick, 1500)}
+        onMouseEnter={debounce(this.startAnimation, 1500)}
+        onClick={debounce(this.startAnimation, 1500)}
       >
         <svg enableBackground="new 0 0 512 512" height={size} viewBox="0 0 512 512" width={size} xmlns="http://www.w3.org/2000/svg">
           <g id="rain">

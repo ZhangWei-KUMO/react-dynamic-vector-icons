@@ -17,6 +17,15 @@ class Icon extends PureComponent {
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 2500)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 2500)()
+      }, 2500)
+    } else {
+      return;
+    }
   };
 
   componentWillUnmount() {

@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { TimelineMax, Power2, Bounce } from "gsap";
+import { gsap, TimelineMax, Power2, Bounce } from "gsap";
 import debounce from '../../util/debounce';
+import { CSSPlugin } from 'gsap/CSSPlugin'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 
 class Icon extends PureComponent {
   constructor(props) {
@@ -17,6 +19,20 @@ class Icon extends PureComponent {
     var tl = new TimelineMax();
     tl.from('#double-check-once', 0.5, { y: 300, transformOrigin: "top", ease: Bounce.easeOut })
       .from('#double-check-twice', 0.5, { y: 300, transformOrigin: "top", ease: Bounce.easeOut })
+  };
+
+  componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
+    gsap.registerPlugin(MotionPathPlugin);
+    let { type } = this.props;
+    if (type === "loopPlay") {
+      debounce(this.startAnimation, 3000)()
+      let timer = setInterval(() => {
+        debounce(this.startAnimation, 3000)()
+      }, 3000)
+    } else {
+      return;
+    }
   };
 
   componentWillUnmount() {
