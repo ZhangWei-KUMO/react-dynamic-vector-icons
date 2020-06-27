@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { TimelineMax, Power2, Bounce, Circ } from "gsap";
+import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin';
 
-class Icon extends Component {
+class Navigator extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
-  componentDidMount() {
-    let { trigger, type } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
-    } else {
-      return;
-    }
+  static defaultProps = {
+    size: "80",
   };
 
-  animation = () => {
+  componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
+    gsap.registerPlugin(MotionPathPlugin);
+  };
+
+  componentWillUnmount() {
+    this.timer = null
+  };
+
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.to("#compress-pointer", 0.5, { rotation: 720, transformOrigin: "center" })
       .to("#compress-pointer", 0.5, { rotation: -20, transformOrigin: "center" })
@@ -32,32 +32,13 @@ class Icon extends Component {
       .to("#compress-pointer", 1, { rotation: 0, transformOrigin: "center" })
   };
 
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
-  componentWillUnmount() {
-    this.timer = null
-  };
-
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 4000)}
-        onClick={debounce(this.handleClick, 4000)}
+        onMouseEnter={debounce(this.startAnimation, 4000)}
+        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg id="Capa_2" enableBackground="new 0 0 80 80" height={size} width={size}
           viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +65,6 @@ class Icon extends Component {
               <g id="compress-pointer">
                 <path d="m321.141 247.941-93.7 36.571-36.57 93.699 93.699-36.57z" fill="#f3403f" />
                 <path d="m321.141 247.941-65.135 25.423v79.425l28.564-11.148z" fill="#d10040" />
-
               </g>
             </g>
           </g>
@@ -94,4 +74,4 @@ class Icon extends Component {
   }
 }
 
-export default Icon;
+export default Navigator;

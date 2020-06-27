@@ -1,2 +1,9 @@
+export { default as CheckBoard } from "./Icon/checkBoard";
+export { default as DoubleCheck } from "./Icon/doubleCheck";
 export { default as Finance } from "./Icon/finance";
 export { default as Feedback } from "./Icon/feedback";
+export { default as GuideBoarder } from "./Icon/guideBoarder";
+export { default as Icecream } from "./Icon/icecream";
+export { default as Industry } from "./Icon/industry";
+export { default as Navigator } from "./Icon/navigator";
+export { default as Rain } from "./Icon/rain";

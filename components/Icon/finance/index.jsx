@@ -1,34 +1,25 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { CSSPlugin } from 'gsap/CSSPlugin';
 import debounce from '../../util/debounce';
 
-class Icon extends Component {
+class Icon extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
-  componentDidMount() {
-    gsap.registerPlugin(CSSPlugin)
-    gsap.registerPlugin(MotionPathPlugin);
-    let { trigger, type } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
-    } else {
-      return;
-    }
+  static defaultProps = {
+    size: "80",
   };
 
-  animation = () => {
+  componentWillUnmount() {
+    this.timer = null
+  };
+
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.from('#finance-bottom-line', 0.5, { scaleY: 0, transformOrigin: "center", ease: Bounce.easeOut })
       .from('#finance-red', 0.3, { scaleX: 0, transformOrigin: "bottom", ease: Bounce.easeOut })
@@ -37,33 +28,13 @@ class Icon extends Component {
       .from('#finance-up-line', 0.4, { scale: 0, transformOrigin: "left", ease: Bounce.easeOut })
   };
 
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  };
-
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
-  componentWillUnmount() {
-    this.timer = null
-  };
-
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 4000)}
-        onClick={debounce(this.handleClick, 4000)}
+        onMouseEnter={debounce(this.startAnimation, 4000)}
+        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg id="Capa_7" enableBackground="new 0 0 512 512" viewBox="0 0 512 512" height={size} width={size} xmlns="http://www.w3.org/2000/svg">
           <g>

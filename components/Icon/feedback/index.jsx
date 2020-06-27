@@ -1,35 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin'
 
-class Icon extends Component {
-
-
+class Icon extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
-  componentDidMount() {
-    gsap.registerPlugin(MotionPathPlugin);
-    let { trigger } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
-    } else {
-      return;
-    }
+  static defaultProps = {
+    size: "80",
   };
 
-  animation = () => {
+  componentDidMount() {
+    gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
+  };
 
+  componentWillUnmount() {
+    this.timer = null
+  };
+
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.from('#feedback-say', 1, { x: -800, transformOrigin: "center" })
       .from('#feedback-points', 0.2, { opacity: 0, transformOrigin: "center" })
@@ -39,32 +33,14 @@ class Icon extends Component {
       .from('#feedback-heart', 1, { y: 800, transformOrigin: "center", ease: Power2.easeOut })
   };
 
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
-  };
-
-  componentWillUnmount() {
-    this.timer = null
-  };
 
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 4000)}
-        onClick={debounce(this.handleClick, 4000)}
+        onMouseEnter={debounce(this.startAnimation, 4000)}
+        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg enableBackground="new 0 0 509.208 509.208" height={size}
           viewBox="0 0 509.208 509.208" width={size} xmlns="http://www.w3.org/2000/svg">

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin';
 
-class Icon extends Component {
+class Rain extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
@@ -79,4 +80,4 @@ class Icon extends Component {
   }
 }
 
-export default Icon;
+export default Rain;

@@ -1,80 +1,42 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { gsap, TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 
-class Icon extends Component {
-  // static propTypes = {
-  //   prefixCls: PropTypes.string,
-  //   type: PropTypes.string,
-  //   size: PropTypes.string,
-  //   trigger: PropTypes.string,
-  // };
-
-  // static defaultProps = {
-  //   prefixCls: "ice-components",
-  //   type: "",
-  //   size: "60",
-  //   trigger: ""
-  // };
-
+class Icon extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
+  static defaultProps = {
+    size: "80",
+  };
+
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
-    let { trigger } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 5000)
-    } else {
-      return;
-    }
-  };
-
-  animation = () => {
-    var tl = new TimelineMax();
-    tl.from('#ice-board', 0.6, { y: -800, transformOrigin: "center", ease: Power2.easeOut })
-      .from('#ice-board-bc', 0.2, { opacity: 0, transformOrigin: "center", ease: Power2.easeOut })
-      .from('#ice-board-check', 0.2, { opacity: 0, transformOrigin: "center", ease: Power2.easeOut })
-
-  };
-
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
   };
 
   componentWillUnmount() {
     this.timer = null
   };
 
+
+  startAnimation = () => {
+    var tl = new TimelineMax();
+    tl.from('#ice-board', 0.6, { y: -800, transformOrigin: "center", ease: Power2.easeOut })
+      .from('#ice-board-bc', 0.2, { opacity: 0, transformOrigin: "center", ease: Power2.easeOut })
+      .from('#ice-board-check', 0.2, { opacity: 0, transformOrigin: "center", ease: Power2.easeOut })
+  }
+
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 2500)}
-        onClick={debounce(this.handleClick, 2500)}
+        onMouseEnter={debounce(this.startAnimation, 2500)}
       >
         <svg enableBackground="new 0 0 512 512" height={size} viewBox="0 0 512 512" width={size} xmlns="http://www.w3.org/2000/svg">
           <g id="ice-board">
@@ -93,9 +55,6 @@ class Icon extends Component {
             <path d="m237.271 391.099-46.713-46.714 21.213-21.213 25.5 25.501 18.729-18.729 15.167 12.556-15.167 29.87z" fill="#f5f2f1" />
             <path d="m256 372.37 65.442-65.442-21.213-21.213-44.229 44.229z" fill="#dbd1cc" />
           </g>
-
-
-
         </svg>
       </span >
     )

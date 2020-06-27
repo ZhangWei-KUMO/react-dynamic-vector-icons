@@ -1,63 +1,35 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { TimelineMax, Power2, Bounce } from "gsap";
 import debounce from '../../util/debounce';
 
-class Icon extends Component {
-
+class Icon extends PureComponent {
   constructor(props) {
     super(props);
     this.timer = null
   };
 
-  componentDidMount() {
-    let { trigger, type } = this.props;
-    if (trigger === "loaded") {
-      this.animation()
-      return;
-    } else if (trigger === "loopPlay") {
-      this.animation()
-      setInterval(() => {
-        this.animation()
-      }, 3000)
-    } else {
-      return;
-    }
+  static defaultProps = {
+    size: "80",
   };
 
-  animation = () => {
+  startAnimation = () => {
     var tl = new TimelineMax();
     tl.from('#double-check-once', 0.5, { y: 300, transformOrigin: "top", ease: Bounce.easeOut })
       .from('#double-check-twice', 0.5, { y: 300, transformOrigin: "top", ease: Bounce.easeOut })
-  };
-
-  handleClick = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "onClick") {
-      this.animation()
-    }
-    return;
-  }
-  handleMouseEnter = () => {
-    let { trigger, type } = this.props;
-    if (trigger === "mouseEnter") {
-      this.animation()
-    }
-    return;
   };
 
   componentWillUnmount() {
     this.timer = null
   };
 
-
   render() {
     let { size } = this.props;
     return (
       <span
         height={size} width={size}
-        onMouseEnter={debounce(this.handleMouseEnter, 3000)}
-        onClick={debounce(this.handleClick, 3000)}
+        onMouseEnter={debounce(this.startAnimation, 3000)}
+        onClick={debounce(this.startAnimation, 3000)}
       >
         <svg id="Capa_8" enableBackground="new 0 0 512 512" height={size} width={size}
           viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
