@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import GuideBoarder from './guideBoarder';
 import Navigator from './navigator';

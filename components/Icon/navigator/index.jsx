@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 
 class Icon extends Component {
-
-
   constructor(props) {
     super(props);
     this.timer = null
