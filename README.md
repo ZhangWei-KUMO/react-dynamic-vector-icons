@@ -1,5 +1,6 @@
 # React Dynamic Vector Icons
 
-![demo](examples/pic.gif)
+![image](examples/pic.gif)
+
 Developing....
 
