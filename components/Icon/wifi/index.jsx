@@ -5,19 +5,19 @@ import debounce from '../../util/debounce';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 
 class Icon extends Component {
-  // static propTypes = {
-  //   prefixCls: PropTypes.string,
-  //   type: PropTypes.string,
-  //   size: PropTypes.string,
-  //   trigger: PropTypes.string,
-  // };
+  static propTypes = {
+    prefixCls: PropTypes.string,
+    type: PropTypes.string,
+    size: PropTypes.string,
+    trigger: PropTypes.string,
+  };
 
-  // static defaultProps = {
-  //   prefixCls: "ice-components",
-  //   type: "",
-  //   size: "60",
-  //   trigger: ""
-  // };
+  static defaultProps = {
+    prefixCls: "ice-components",
+    type: "",
+    size: "60",
+    trigger: ""
+  };
 
   constructor(props) {
     super(props);
