@@ -1,2 +1,5 @@
-components
-node_modules
+components/
+examples/
+util/
+styleguide/
+node_modules/
