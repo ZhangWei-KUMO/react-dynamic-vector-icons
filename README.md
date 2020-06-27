@@ -1,5 +1,5 @@
 # React Dynamic Vector Icons
 
-![alt text](./pic.gif)
+![](pic.gif)
 Developing....
 
