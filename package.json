@@ -1,6 +1,6 @@
 {
   "name": "react-dynamic-vector-icons",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "license": "MIT",
   "keywords": [
     "react components",
@@ -9,6 +9,9 @@
     "UI library"
   ],
   "homepage": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "bugs": {
     "url": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons/issues"
   },
