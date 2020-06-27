@@ -33,7 +33,8 @@ class Icon extends Component {
 
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
-  }
+  };
+
   render() {
     let { size, type, trigger } = this.props;
     const iconset = {

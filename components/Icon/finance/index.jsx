@@ -4,8 +4,6 @@ import { TimelineMax, Power2, Bounce, Circ } from "gsap";
 import debounce from '../../util/debounce';
 
 class Icon extends Component {
-
-
   constructor(props) {
     super(props);
     this.timer = null
