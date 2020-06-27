@@ -1,6 +1,6 @@
 # React Dynamic Vector Icons
 
-![image](examples/pic.gif)
+![image](https://test-1253763202.cos.ap-shanghai.myqcloud.com/products/pic.gif))
 
 Developing....
 
