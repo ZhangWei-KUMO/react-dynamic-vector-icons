@@ -47,7 +47,13 @@ Any Text property and the following:
 * Tools
 * Wifi
 
+## Support Some SSR Frames
 
+Maybe you could use some SSR React Frames,such as `next.js`,you can import it as follows:
+
+```js
+const GuideBoarder = dynamic(() => import("react-dynamic-vector-icons").then((mod) => mod.GuideBoarder), { ssr: false });
+```
 ## License
 
 This project is licenced under the MIT License.
