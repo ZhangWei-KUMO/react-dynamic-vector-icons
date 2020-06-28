@@ -17,15 +17,7 @@ class Icon extends PureComponent {
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
-    let { type } = this.props;
-    if (type === "loopPlay") {
-      debounce(this.startAnimation, 4000)()
-      let timer = setInterval(() => {
-        debounce(this.startAnimation, 4000)()
-      }, 4000)
-    } else {
-      return;
-    }
+
   };
 
   componentWillUnmount() {
@@ -49,7 +41,6 @@ class Icon extends PureComponent {
       <span
         height={size} width={size}
         onMouseEnter={debounce(this.startAnimation, 4000)}
-        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg enableBackground="new 0 0 509.208 509.208" height={size}
           viewBox="0 0 509.208 509.208" width={size} xmlns="http://www.w3.org/2000/svg">

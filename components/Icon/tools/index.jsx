@@ -45,7 +45,6 @@ class Tools extends PureComponent {
       <span
         height={size} width={size}
         onMouseEnter={debounce(this.startAnimation, 1500)}
-        onClick={debounce(this.startAnimation, 1500)}
       >
         <svg enableBackground="new 0 0 512 512" height={size} width={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
           <g id="tool">

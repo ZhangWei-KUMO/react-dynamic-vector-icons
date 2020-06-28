@@ -43,7 +43,6 @@ class Rain extends PureComponent {
       <span
         height={size} width={size}
         onMouseEnter={debounce(this.startAnimation, 1500)}
-        onClick={debounce(this.startAnimation, 1500)}
       >
         <svg enableBackground="new 0 0 512 512" height={size} viewBox="0 0 512 512" width={size} xmlns="http://www.w3.org/2000/svg">
           <g id="rain">

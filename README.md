@@ -28,10 +28,9 @@ export default () =>(
 
 Any Text property and the following:
 
-| Name | type   | Description                                              | Default |
-| :--- | :----- | :------------------------------------------------------- | :------ |
-| size | String | Size of the icon                                         | `"80"`  |
-| type | String | Animation Types, current version only support `loopPlay` | null    |
+| Name | type   | Description      | Default |
+| :--- | :----- | :--------------- | :------ |
+| size | String | Size of the icon | `"80"`  |
 
 ## Icon categories
 

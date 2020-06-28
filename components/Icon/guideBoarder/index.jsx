@@ -18,15 +18,7 @@ class GuideBoarder extends PureComponent {
   componentDidMount() {
     gsap.registerPlugin(CSSPlugin)
     gsap.registerPlugin(MotionPathPlugin);
-    let { type } = this.props;
-    if (type === "loopPlay") {
-      debounce(this.startAnimation, 4000)()
-      let timer = setInterval(() => {
-        debounce(this.startAnimation, 4000)()
-      }, 4000)
-    } else {
-      return;
-    }
+
   };
 
   componentWillUnmount() {
@@ -51,7 +43,6 @@ class GuideBoarder extends PureComponent {
       <span
         height={size} width={size}
         onMouseEnter={debounce(this.startAnimation, 4000)}
-        onClick={debounce(this.startAnimation, 4000)}
       >
         <svg id="Capa_1" enableBackground="new 0 0 512 512" height={size} width={size}
           viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
