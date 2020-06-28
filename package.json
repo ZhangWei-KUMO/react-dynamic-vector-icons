@@ -9,9 +9,6 @@
     "vector icons"
   ],
   "homepage": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "bugs": {
     "url": "https://github.com/ZhangWei-KUMO/react-dynamic-vector-icons/issues"
   },
